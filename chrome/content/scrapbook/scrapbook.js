@@ -124,6 +124,7 @@ var sbMainService = {
             NOTE_TITLE: newItem.title,
             SCRAPBOOK_DIR: "../..",
             DATA_DIR: ".",
+            NOTE_ID: newItem.id,
         };
         var content = sbCommonUtils.readFile(template, "UTF-8");
         content = content.replace(/<%([\w_]+)%>/g, function(){
