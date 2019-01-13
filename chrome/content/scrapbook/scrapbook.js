@@ -108,6 +108,7 @@ var sbMainService = {
         sbSearchService.exit();
         // create item
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        const now = new Date();
         newItem.id = sbDataSource.identify(newItem.id);
         newItem.title = sbCommonUtils.lang("DEFAULT_NOTEX");
         newItem.type = "notex";
@@ -120,11 +121,16 @@ var sbMainService = {
         var dir = sbCommonUtils.getContentDir(newItem.id);
         var html = dir.clone();
         html.append("index.html");
+        // variables you can use in the notex template
+        // <%NOTE_TITLE%>
+        // <%NOTE_ID%>
+        // <%NOTE_DATE%>
         var tpl = {
             NOTE_TITLE: newItem.title,
             SCRAPBOOK_DIR: "../..",
             DATA_DIR: ".",
             NOTE_ID: newItem.id,
+            NOTE_DATE: now.toDateString(),
         };
         var content = sbCommonUtils.readFile(template, "UTF-8");
         content = content.replace(/<%([\w_]+)%>/g, function(){
